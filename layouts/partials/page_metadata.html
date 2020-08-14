@@ -3,14 +3,20 @@
 
 <div class="article-metadata">
 
-  {{/* If `authors` is set and is not empty. */}}
-  {{ if $page.Params.authors }}
-  {{ $authorLen := len $page.Params.authors }}
-  {{ if gt $authorLen 0 }}
-  <div>
-    {{ partial "page_metadata_authors" $page }}
-  </div>
-  {{ end }}
+  {{ if eq $page.Type "review" }}
+    <div>
+      {{ $page.Params.paper_authors }}
+    </div>
+  {{ else }}
+    {{/* If `authors` is set and is not empty. */}}
+    {{ if $page.Params.authors }}
+    {{ $authorLen := len $page.Params.authors }}
+    {{ if gt $authorLen 0 }}
+    <div>
+      {{ partial "page_metadata_authors" $page }}
+    </div>
+    {{ end }}
+    {{ end }}
   {{ end }}
 
   {{ if not (in (slice "talk" "page") $page.Type) }}
@@ -23,7 +29,13 @@
           {{ i18n "last_updated" }}
       {{ end }}
     {{ end }}
-    {{ $date }}
+    {{ if eq $page.Type "review" }}
+      Published on: {{ $page.Params.paper_date }}
+      <br />
+      Reviewed on: {{ $date }}
+    {{ else }}
+      {{ $date }}
+    {{ end }}
   </span>
   {{ end }}
 

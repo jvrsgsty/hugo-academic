@@ -6,6 +6,11 @@
 
   <div class="article-container">
 
+    {{ if .Params.paper_tldr }}
+    <h3> TL;DR </h3>
+    <p class="pub-abstract">{{ .Params.paper_tldr | markdownify }}</p>
+    {{ end }}
+
     {{ if .Params.abstract }}
     <h3>{{ i18n "abstract" }}</h3>
     <p class="pub-abstract">{{ .Params.abstract | markdownify }}</p>

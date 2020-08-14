@@ -37,10 +37,16 @@
       <a href="{{$link}}" {{ $target | safeHTMLAttr }}>{{ $item.Title }}</a>
     </h3>
 
-    {{ with $summary }}
-    <div class="article-style">
-      {{ . }}
-    </div>
+    {{ if eq $item.Type "review" }}
+      <div class="article-style">
+      <b>TL;DR</b> {{ $item.Params.paper_tldr }} 
+      </div>
+    {{ else }}
+      {{ with $summary }}
+      <div class="article-style">
+        {{ . }}
+      </div>
+      {{ end }}
     {{ end }}
 
     <div class="stream-meta article-metadata">
