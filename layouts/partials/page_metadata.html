@@ -30,9 +30,9 @@
       {{ end }}
     {{ end }}
     {{ if eq $page.Type "review" }}
-      Published on: {{ $page.Params.paper_date }}
+      Published {{ $page.Params.paper_date }}
       <br />
-      Reviewed on: {{ $date }}
+      Reviewed on {{ $date }}
     {{ else }}
       {{ $date }}
     {{ end }}
