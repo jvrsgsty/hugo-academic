@@ -37,11 +37,7 @@
       <a href="{{$link}}" {{ $target | safeHTMLAttr }}>{{ $item.Title }}</a>
     </h3>
 
-    {{ if eq $item.Type "review" }}
-      <div class="article-style">
-      <b>TL;DR</b> {{ $item.Params.paper_tldr }} 
-      </div>
-    {{ else }}
+    {{ if not (eq $item.Type "review") }}
       {{ with $summary }}
       <div class="article-style">
         {{ . }}
@@ -72,6 +68,13 @@
       {{ end }}
     </div>
 
+    {{ if eq $item.Type "review" }}
+      <div class="article-style">
+      <b>TL;DR</b> {{ $item.Params.paper_tldr }} 
+      </div>
+      {{ partial "tags" . }}
+    {{ end }}
+    
     {{ if $show_buttons }}
     <div class="btn-links">
       {{ partial "page_links" (dict "page" $item "is_list" 1) }}
